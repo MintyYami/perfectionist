@@ -1,11 +1,10 @@
 import GameArea from './components/GameArea.tsx'
-import Header from './components/Header.tsx'
 import './App.css'
 
 function App() {
   return (
     <div className="app">
-      <Header />
+      <h1 className="app__title">Perfectionist</h1>
       <GameArea />
     </div>
   )

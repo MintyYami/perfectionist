@@ -1,0 +1,54 @@
+.angle {
+  display: block;
+  width: min(100%, 320px);
+  height: auto;
+  aspect-ratio: 1;
+  touch-action: none; /* stop touch drags from scrolling the page */
+  user-select: none;
+}
+
+.angle--interactive {
+  cursor: grab;
+}
+
+.angle--interactive:active {
+  cursor: grabbing;
+}
+
+.angle__dial {
+  fill: var(--bg);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+.angle__sector {
+  fill: var(--guess);
+  fill-opacity: 0.15;
+}
+
+.angle__baseline {
+  stroke: var(--text);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.angle__guess-arm {
+  stroke: var(--guess);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.angle__handle {
+  fill: var(--guess);
+}
+
+.angle__target-arm {
+  stroke: var(--target);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 8 6;
+}
+
+.angle__pivot {
+  fill: var(--text-h);
+}
