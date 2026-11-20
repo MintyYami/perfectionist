@@ -1,0 +1,11 @@
+.header {
+  text-align: center;
+}
+
+.header__title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-h);
+}

@@ -1,0 +1,12 @@
+.game-area {
+  flex: 1;
+  width: 100%;
+  max-width: 720px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: 16px;
+}
