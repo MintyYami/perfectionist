@@ -27,9 +27,14 @@ function newRound(previous?: ChallengeDefinition): Round {
 /** Game flow: random challenge → adjust guess → submit → result → again. */
 export function useGame() {
   const [round, setRound] = useState(() => newRound())
+  const { challenge, guess, target } = round
+  const offBy = challenge.offBy?.(guess, target) ?? Math.abs(guess - target)
 
   return {
     ...round,
+    offBy,
+    /** offBy as a percentage of the challenge's full scale. */
+    offByPercent: (offBy / challenge.fullScale) * 100,
     setGuess: (guess: number) =>
       setRound((current) => (current.phase === 'playing' ? { ...current, guess } : current)),
     submit: () => setRound((current) => ({ ...current, phase: 'result' })),

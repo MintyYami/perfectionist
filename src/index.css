@@ -49,8 +49,13 @@ body {
   cursor: pointer;
 }
 
-.button:hover {
+.button:hover:enabled {
   filter: brightness(1.1);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .button:focus-visible {

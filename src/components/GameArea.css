@@ -1,7 +1,16 @@
-.game-area {
+/* The game area plus the result pop-up, which sits outside it (see ResultPopup.css). */
+.game {
+  position: relative;
   flex: 1;
   width: 100%;
   max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.game-area {
+  flex: 1;
   min-height: 400px;
   display: flex;
   flex-direction: column;

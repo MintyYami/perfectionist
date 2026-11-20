@@ -14,13 +14,7 @@
 @keyframes result-popup-in {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.96);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .result-popup {
-    animation: none;
+    transform: translateX(-8px) scale(0.96);
   }
 }
 
@@ -63,19 +57,45 @@
   background: var(--target);
 }
 
+.result-popup__value dd {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
 .result-popup__off-by {
   margin: 0;
-  font-variant-numeric: tabular-nums;
 }
 
 .result-popup__off-by strong {
   color: var(--text-h);
 }
 
-.result-popup__value dd {
-  margin: 0;
-  font-size: 1.75rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--text-h);
+/*
+ * Wide screens: to the right of the game area, vertically centred, leaving the
+ * game area centred on the page. Narrower screens have no room beside it, so
+ * the pop-up sits below the game area instead.
+ */
+@media (min-width: 1280px) {
+  .result-popup {
+    position: absolute;
+    left: calc(100% + 24px);
+    top: 0;
+    bottom: 0;
+    width: 240px;
+    height: fit-content;
+    margin: auto 0;
+  }
+
+  .result-popup__values {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-popup {
+    animation: none;
+  }
 }
