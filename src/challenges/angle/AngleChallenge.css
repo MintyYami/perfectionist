@@ -2,17 +2,6 @@
   display: block;
   width: min(100%, 320px);
   height: auto;
-  aspect-ratio: 1;
-  touch-action: none; /* stop touch drags from scrolling the page */
-  user-select: none;
-}
-
-.angle--interactive {
-  cursor: grab;
-}
-
-.angle--interactive:active {
-  cursor: grabbing;
 }
 
 .angle__dial {
@@ -32,21 +21,8 @@
   stroke-linecap: round;
 }
 
-.angle__guess-arm {
-  stroke: var(--guess);
-  stroke-width: 4;
-  stroke-linecap: round;
-}
-
 .angle__handle {
   fill: var(--guess);
-}
-
-.angle__target-arm {
-  stroke: var(--target);
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-dasharray: 8 6;
 }
 
 .angle__pivot {

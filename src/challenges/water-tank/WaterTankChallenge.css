@@ -1,0 +1,43 @@
+/*
+ * Three columns with equal outer widths keep the tank centred; the capacity
+ * label sits in the right column, aligned to the tank's bottom.
+ */
+.tank {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: 16px;
+}
+
+.tank__svg {
+  grid-column: 2;
+  display: block;
+  width: min(50vw, 200px);
+  height: auto;
+}
+
+.tank__svg.draggable {
+  cursor: ns-resize;
+}
+
+.tank__capacity {
+  grid-column: 3;
+  align-self: end;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.tank__body {
+  fill: var(--bg);
+}
+
+.tank__water {
+  fill: var(--water);
+  fill-opacity: 0.45;
+}
+
+.tank__outline {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 3;
+}

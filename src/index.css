@@ -8,6 +8,7 @@
   /* Colours challenges use for the player's guess and the revealed target. */
   --guess: var(--accent);
   --target: #16a34a;
+  --water: #38bdf8;
 
   font: 18px/1.5 system-ui, 'Segoe UI', Roboto, sans-serif;
   color-scheme: light dark;
@@ -55,4 +56,31 @@ body {
 .button:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
+}
+
+/* Lines a challenge draws for the player's guess and the revealed target. */
+.guess-line,
+.target-line {
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.guess-line {
+  stroke: var(--guess);
+}
+
+.target-line {
+  stroke: var(--target);
+  stroke-dasharray: 8 6;
+}
+
+/* A challenge surface the player drags on (see src/challenges/drag.ts). */
+.draggable {
+  touch-action: none; /* stop touch drags from scrolling the page */
+  user-select: none;
+  cursor: grab;
+}
+
+.draggable:active {
+  cursor: grabbing;
 }

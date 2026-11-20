@@ -8,7 +8,7 @@ export interface ChallengeProps {
   /**
    * null while the player is guessing. After Submit it holds the target: the
    * challenge should stop accepting input and draw the target next to the guess
-   * (using the --guess and --target CSS colours).
+   * (using the guess-line / target-line CSS classes or --guess / --target colours).
    */
   revealedTarget: number | null
 }

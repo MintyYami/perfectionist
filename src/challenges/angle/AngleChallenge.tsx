@@ -1,4 +1,4 @@
-import type { PointerEvent } from 'react'
+import { dragHandlers, pointerInViewBox } from '../drag.ts'
 import type { ChallengeProps } from '../types.ts'
 import './AngleChallenge.css'
 
@@ -31,45 +31,28 @@ function Arm({ className, degrees }: { className: string; degrees: number }) {
   return <line className={className} x1={CENTER} y1={CENTER} x2={end.x} y2={end.y} />
 }
 
-/** Whole-degree angle (0–359) of the pointer relative to the dial centre. */
-function angleFromPointer(event: PointerEvent<SVGSVGElement>) {
-  const rect = event.currentTarget.getBoundingClientRect()
-  const x = ((event.clientX - rect.left) / rect.width) * SIZE - CENTER
-  const y = ((event.clientY - rect.top) / rect.height) * SIZE - CENTER
-  const degrees = (Math.atan2(x, -y) * 180) / Math.PI
-  return Math.round(degrees + 360) % 360
-}
-
 function AngleChallenge({ value, onChange, revealedTarget }: ChallengeProps) {
   const interactive = revealedTarget === null
-
-  const handlePointerDown = (event: PointerEvent<SVGSVGElement>) => {
-    if (!interactive) return
-    event.currentTarget.setPointerCapture(event.pointerId)
-    onChange(angleFromPointer(event))
-  }
-
-  const handlePointerMove = (event: PointerEvent<SVGSVGElement>) => {
-    if (!interactive || !event.currentTarget.hasPointerCapture(event.pointerId)) return
-    onChange(angleFromPointer(event))
-  }
-
   const guess = pointAt(value)
 
   return (
     <svg
-      className={interactive ? 'angle angle--interactive' : 'angle'}
+      className={interactive ? 'angle draggable' : 'angle'}
       viewBox={`0 0 ${SIZE} ${SIZE}`}
       role="img"
       aria-label="Angle dial"
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
+      {...dragHandlers(interactive, (event) => {
+        // Whole-degree angle (0–359) of the pointer, clockwise from 12 o'clock.
+        const { x, y } = pointerInViewBox(event, SIZE, SIZE)
+        const degrees = (Math.atan2(x - CENTER, CENTER - y) * 180) / Math.PI
+        onChange(Math.round(degrees + 360) % 360)
+      })}
     >
       <circle className="angle__dial" cx={CENTER} cy={CENTER} r={RADIUS} />
       <path className="angle__sector" d={sectorPath(value)} />
       <Arm className="angle__baseline" degrees={0} />
-      {revealedTarget !== null && <Arm className="angle__target-arm" degrees={revealedTarget} />}
-      <Arm className="angle__guess-arm" degrees={value} />
+      {revealedTarget !== null && <Arm className="target-line" degrees={revealedTarget} />}
+      <Arm className="guess-line" degrees={value} />
       <circle className="angle__handle" cx={guess.x} cy={guess.y} r={10} />
       <circle className="angle__pivot" cx={CENTER} cy={CENTER} r={5} />
     </svg>
