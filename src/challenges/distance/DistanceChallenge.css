@@ -1,0 +1,29 @@
+/* Road across the width, with the length label under it on the right. */
+.distance {
+  width: min(100%, 560px);
+}
+
+.distance__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.distance__svg.draggable {
+  cursor: ew-resize;
+}
+
+.distance__length {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.distance__road {
+  fill: var(--text);
+  fill-opacity: 0.35;
+}
+
+.distance__pole {
+  fill: var(--text);
+}

@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { dragHandlers, pointerInViewBox } from '../drag.ts'
+import { dragHandlers, pointerInViewBox, toScale } from '../drag.ts'
 import type { ChallengeProps } from '../types.ts'
 import './WaterTankChallenge.css'
 
@@ -36,10 +36,8 @@ function WaterTankChallenge({ value, onChange, revealedTarget }: ChallengeProps)
         role="img"
         aria-label="Water tank"
         {...dragHandlers(interactive, (event) => {
-          // Whole litres at the pointer's height, clamped to the tank.
           const { y } = pointerInViewBox(event, WIDTH, HEIGHT)
-          const fraction = Math.min(1, Math.max(0, (TANK_BOTTOM - y) / TANK.height))
-          onChange(Math.round(fraction * TANK_CAPACITY))
+          onChange(toScale(TANK_BOTTOM - y, TANK.height, TANK_CAPACITY))
         })}
       >
         <defs>

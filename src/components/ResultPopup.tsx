@@ -4,10 +4,12 @@ interface ResultPopupProps {
   /** Formatted values, e.g. "128°". */
   guess: string
   target: string
+  /** e.g. "9° (2.5%)". */
+  offBy: string
   onAgain: () => void
 }
 
-function ResultPopup({ guess, target, onAgain }: ResultPopupProps) {
+function ResultPopup({ guess, target, offBy, onAgain }: ResultPopupProps) {
   return (
     <div className="result-popup" role="dialog" aria-labelledby="result-popup-title">
       <h2 id="result-popup-title" className="result-popup__title">
@@ -23,6 +25,9 @@ function ResultPopup({ guess, target, onAgain }: ResultPopupProps) {
           <dd>{target}</dd>
         </div>
       </dl>
+      <p className="result-popup__off-by">
+        Off by <strong>{offBy}</strong>
+      </p>
       <button type="button" className="button" onClick={onAgain} autoFocus>
         Again
       </button>

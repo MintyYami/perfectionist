@@ -53,7 +53,7 @@ function AngleChallenge({ value, onChange, revealedTarget }: ChallengeProps) {
       <Arm className="angle__baseline" degrees={0} />
       {revealedTarget !== null && <Arm className="target-line" degrees={revealedTarget} />}
       <Arm className="guess-line" degrees={value} />
-      <circle className="angle__handle" cx={guess.x} cy={guess.y} r={10} />
+      <circle className="guess-fill" cx={guess.x} cy={guess.y} r={10} />
       <circle className="angle__pivot" cx={CENTER} cy={CENTER} r={5} />
     </svg>
   )

@@ -6,6 +6,8 @@ function GameArea() {
   const { challenge, target, guess, phase, setGuess, submit, playAgain } = useGame()
   const { Component } = challenge
   const showingResult = phase === 'result'
+  const offBy = challenge.offBy?.(guess, target) ?? Math.abs(guess - target)
+  const offByPercent = ((offBy / challenge.fullScale) * 100).toFixed(1)
 
   return (
     <main className="game-area">
@@ -23,6 +25,7 @@ function GameArea() {
         <ResultPopup
           guess={challenge.formatValue(guess)}
           target={challenge.formatValue(target)}
+          offBy={`${challenge.formatValue(offBy)} (${offByPercent}%)`}
           onAgain={playAgain}
         />
       ) : (

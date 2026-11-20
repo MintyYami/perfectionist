@@ -19,6 +19,14 @@ export function dragHandlers(enabled: boolean, onDrag: (event: SvgPointerEvent) 
   }
 }
 
+/**
+ * Converts a distance along a track of `length` (in viewBox units) into a whole
+ * number from 0 to `max`, clamped to the ends of the track.
+ */
+export function toScale(distance: number, length: number, max: number) {
+  return Math.round(Math.min(1, Math.max(0, distance / length)) * max)
+}
+
 /** Pointer position in the svg's viewBox coordinates (viewBox starting at 0 0). */
 export function pointerInViewBox(event: SvgPointerEvent, width: number, height: number) {
   const rect = event.currentTarget.getBoundingClientRect()

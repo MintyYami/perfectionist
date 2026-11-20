@@ -21,10 +21,6 @@
   stroke-linecap: round;
 }
 
-.angle__handle {
-  fill: var(--guess);
-}
-
 .angle__pivot {
   fill: var(--text-h);
 }

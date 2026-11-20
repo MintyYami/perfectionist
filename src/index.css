@@ -58,7 +58,11 @@ body {
   outline-offset: 3px;
 }
 
-/* Lines a challenge draws for the player's guess and the revealed target. */
+/* Marks a challenge draws for the player's guess and the revealed target. */
+.guess-fill {
+  fill: var(--guess);
+}
+
 .guess-line,
 .target-line {
   stroke-width: 4;

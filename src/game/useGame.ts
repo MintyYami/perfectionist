@@ -11,8 +11,14 @@ interface Round {
   phase: 'playing' | 'result'
 }
 
-function newRound(): Round {
-  const challenge = randomItem(challenges)
+/** Random challenge, never the same type as `previous` (unless it's the only one). */
+function pickChallenge(previous?: ChallengeDefinition) {
+  const others = challenges.filter((challenge) => challenge !== previous)
+  return others.length > 0 ? randomItem(others) : challenges[0]
+}
+
+function newRound(previous?: ChallengeDefinition): Round {
+  const challenge = pickChallenge(previous)
   const { min, max } = challenge.targetRange
   // Every challenge's control starts at 0.
   return { challenge, target: randomInt(min, max), guess: 0, phase: 'playing' }
@@ -20,13 +26,13 @@ function newRound(): Round {
 
 /** Game flow: random challenge → adjust guess → submit → result → again. */
 export function useGame() {
-  const [round, setRound] = useState(newRound)
+  const [round, setRound] = useState(() => newRound())
 
   return {
     ...round,
     setGuess: (guess: number) =>
       setRound((current) => (current.phase === 'playing' ? { ...current, guess } : current)),
     submit: () => setRound((current) => ({ ...current, phase: 'result' })),
-    playAgain: () => setRound(newRound()),
+    playAgain: () => setRound((current) => newRound(current.challenge)),
   }
 }

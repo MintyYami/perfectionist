@@ -8,7 +8,7 @@ export interface ChallengeProps {
   /**
    * null while the player is guessing. After Submit it holds the target: the
    * challenge should stop accepting input and draw the target next to the guess
-   * (using the guess-line / target-line CSS classes or --guess / --target colours).
+   * (using the guess-line / guess-fill / target-line CSS classes in index.css).
    */
   revealedTarget: number | null
 }
@@ -20,6 +20,10 @@ export interface ChallengeProps {
 export interface ChallengeDefinition {
   /** Inclusive range for the random whole-number target. */
   targetRange: { min: number; max: number }
+  /** The whole scale (e.g. 360°, 2500L), used for the "Off by" percentage. */
+  fullScale: number
+  /** How far the guess is from the target. Defaults to the plain numeric difference. */
+  offBy?: (guess: number, target: number) => number
   /** Instruction shown above the challenge, e.g. "Drag to make an angle of 137°". */
   instruction: (target: number) => string
   /** Formats a value in this challenge's unit, e.g. 137 → "137°". */

@@ -63,6 +63,15 @@
   background: var(--target);
 }
 
+.result-popup__off-by {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-popup__off-by strong {
+  color: var(--text-h);
+}
+
 .result-popup__value dd {
   margin: 0;
   font-size: 1.75rem;

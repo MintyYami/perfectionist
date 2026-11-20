@@ -1,4 +1,5 @@
 import { angleChallenge } from './angle/index.ts'
+import { distanceChallenge } from './distance/index.ts'
 import type { ChallengeDefinition } from './types.ts'
 import { waterTankChallenge } from './water-tank/index.ts'
 
@@ -9,4 +10,5 @@ import { waterTankChallenge } from './water-tank/index.ts'
 export const challenges: readonly [ChallengeDefinition, ...ChallengeDefinition[]] = [
   angleChallenge,
   waterTankChallenge,
+  distanceChallenge,
 ]
