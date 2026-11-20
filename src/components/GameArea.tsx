@@ -31,6 +31,7 @@ function GameArea() {
           guess={challenge.formatValue(guess)}
           target={challenge.formatValue(target)}
           offBy={`${challenge.formatValue(offBy)} (${offByPercent.toFixed(1)}%)`}
+          celebrate={offBy === 0}
           onAgain={playAgain}
         />
       )}

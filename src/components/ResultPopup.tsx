@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+import confetti from 'canvas-confetti'
 import './ResultPopup.css'
 
 interface ResultPopupProps {
@@ -6,12 +8,28 @@ interface ResultPopupProps {
   target: string
   /** e.g. "9° (2.5%)". */
   offBy: string
+  /** Burst confetti out of the pop-up when it appears (exact guess). */
+  celebrate: boolean
   onAgain: () => void
 }
 
-function ResultPopup({ guess, target, offBy, onAgain }: ResultPopupProps) {
+function ResultPopup({ guess, target, offBy, celebrate, onAgain }: ResultPopupProps) {
+  const popupRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!celebrate || !popupRef.current) return
+    // The origin is a 0–1 fraction of the viewport: the pop-up's centre.
+    const { left, top, width, height } = popupRef.current.getBoundingClientRect()
+    void confetti({
+      particleCount: 150,
+      spread: 360,
+      startVelocity: 35,
+      origin: { x: (left + width / 2) / innerWidth, y: (top + height / 2) / innerHeight },
+    })
+  }, [celebrate])
+
   return (
-    <div className="result-popup" role="dialog" aria-labelledby="result-popup-title">
+    <div ref={popupRef} className="result-popup" role="dialog" aria-labelledby="result-popup-title">
       <h2 id="result-popup-title" className="result-popup__title">
         Result
       </h2>
