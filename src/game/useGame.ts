@@ -19,9 +19,10 @@ function pickChallenge(previous?: ChallengeDefinition) {
 
 function newRound(previous?: ChallengeDefinition): Round {
   const challenge = pickChallenge(previous)
-  const { min, max } = challenge.targetRange
+  const { min, max, step = 1 } = challenge.targetRange
+  const target = min + step * randomInt(0, Math.floor((max - min) / step))
   // Every challenge's control starts at 0.
-  return { challenge, target: randomInt(min, max), guess: 0, phase: 'playing' }
+  return { challenge, target, guess: 0, phase: 'playing' }
 }
 
 /** Game flow: random challenge → adjust guess → submit → result → again. */

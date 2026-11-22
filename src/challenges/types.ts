@@ -18,8 +18,11 @@ export interface ChallengeProps {
  * export one of these from its index.ts, and list it in registry.ts.
  */
 export interface ChallengeDefinition {
-  /** Inclusive range for the random whole-number target. */
-  targetRange: { min: number; max: number }
+  /**
+   * Inclusive range for the random whole-number target. With `step`, the target
+   * is `min` plus a multiple of `step` (e.g. whole seconds in a 0.1s unit).
+   */
+  targetRange: { min: number; max: number; step?: number }
   /** The whole scale (e.g. 360°, 2500L), used for the "Off by" percentage. */
   fullScale: number
   /** How far the guess is from the target. Defaults to the plain numeric difference. */

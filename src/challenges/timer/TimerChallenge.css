@@ -1,0 +1,67 @@
+/*
+ * A flat round push button with a solid darker edge below it.
+ * Pressing pushes it down onto the edge.
+ */
+.timer__button {
+  --depth: 8px;
+  --edge: color-mix(in srgb, var(--accent), #000 35%);
+  width: 160px;
+  height: 160px;
+  margin-bottom: var(--depth);
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 var(--depth) 0 var(--edge);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform 60ms ease-out,
+    box-shadow 60ms ease-out;
+}
+
+.timer__button:hover {
+  filter: brightness(1.1);
+}
+
+.timer__button:active {
+  transform: translateY(calc(var(--depth) - 2px));
+  box-shadow: 0 2px 0 var(--edge);
+}
+
+.timer__button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timer__button {
+    transition: none;
+  }
+}
+
+/* Revealed timeline: 0s to 5s, with the guess as a bar and the target as a line. */
+.timer {
+  width: min(100%, 480px);
+}
+
+.timer__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.timer__track {
+  fill: var(--text);
+  fill-opacity: 0.15;
+}
+
+.timer__scale {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+}
