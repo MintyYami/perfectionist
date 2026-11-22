@@ -28,5 +28,3 @@ Then open http://localhost:5173/.
 ## Deployment
 
 The site is published at `https://mintyyami.github.io/perfectionist/`.
-
-Production builds use `/perfectionist/` as the base path (see `vite.config.ts`) so asset URLs match the GitHub Pages project URL. If the repository is renamed, update `base` to match.
