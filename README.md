@@ -1,6 +1,6 @@
 # Perfectionist
 
-A browser game about precision: you're given a random percentage and have to hit it as exactly as you can, by dragging an angle, filling a water tank, moving a slider, and so on.
+A browser game about precision: check whether you are good at estimating the correct unit measurement or not!
 
 Built with React, TypeScript and Vite, and hosted on GitHub Pages.
 
